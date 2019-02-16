@@ -4,11 +4,12 @@ const path = require('path');
 
 module.exports = {
   entry: './src/js/react-timeslot-calendar.jsx',
-
+  externals: ['react', 'react-dom'],
+  target: 'node',
   output: {
     path: path.join(__dirname, './build'),
     filename: 'build.min.js',
-    libraryTarget: 'umd',
+    libraryTarget: 'commonjs2',
   },
   plugins: [
     new WebpackBundleSizeAnalyzerPlugin('./reports/plain-report.txt'),
@@ -32,8 +33,6 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [{
-          loader: 'style-loader', // creates style nodes from JS strings
-        }, {
           loader: 'css-loader', // translates CSS into CommonJS
         }, {
           loader: 'sass-loader', // compiles Sass to CSS
